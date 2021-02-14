@@ -21,36 +21,39 @@ class eventHandler {
 
         this.gridElement = document.getElementById("grid-show-system")
 
-        gridElement.addEventListener("click", (event) => {
+        this.gridElement.addEventListener("click", (event) => {
             let rowId;
-            if (targetElement != null) {
-                rowId = eventElement.target.getAttribute("data-row-id")
+            if (event.target.getAttribute("data-row-id") != undefined) {
+                rowId = event.target.getAttribute("data-row-id")
             } else {
-                rowId = eventElement.target.parentElement.getAttribute("data-row-id")
+                rowId = event.target.parentElement.getAttribute("data-row-id");
             }
+            this.globalMainHandler.selectRow(rowId)
         })
     }
 }
 
 class mainHandler {
     constructor(guiHandler) {
+        this.lastRowCount = 0;
         this.rows = []
         this.selectedRow = null;
         this.globalGuiHandler = guiHandler;
         this.generateFakeData()
     }
     addRow() {
-        let newRow = new row();
+        let newRow = new row(this.lastRowCount);
         this.rows.push(newRow);
         this.selectedRow = newRow;
         this.redraw()
+        this.lastRowCount++;
     }
     addColumn(size, offset) {
         this.selectedRow.addColumn(size, offset)
         this.redraw()
     }
     redraw() {
-        this.globalGuiHandler.redraw(this.rows);
+        this.globalGuiHandler.redraw(this.rows, this.selectedRow.id);
     }
     generateFakeData() {
         this.addRow();
@@ -61,6 +64,11 @@ class mainHandler {
         this.addRow();
         this.addColumn(10, 1)
     }
+    selectRow(id) {
+        this.selectedRow = this.rows.find(row => row.id == id);
+        this.redraw();
+    }
+
 
 }
 
@@ -69,11 +77,14 @@ class guiHandler {
         this.gridDiv = document.getElementById("grid-show-system");
     }
 
-    redraw(rows) {
+    redraw(rows, selectedRowId) {
         this.gridDiv.innerHTML = "";
 
         for (let rowNumber = 0; rowNumber < rows.length; rowNumber++) {
             let rowHtml = rows[rowNumber].getHtmlElement(rowNumber);
+            if (selectedRowId == rows[rowNumber].id) {
+                rowHtml.classList.add("selectedRow")
+            }
             this.gridDiv.appendChild(rowHtml);
         }
 
@@ -84,9 +95,10 @@ class guiHandler {
 };
 
 class row {
-    constructor() {
+    constructor(id) {
         this.columnsSize = 0;
-        this.columns = []
+        this.columns = [];
+        this.id = id;
     }
     addColumn(size, offset = 0) {
         if (this.columnsSize + size + offset <= 12) {
@@ -95,10 +107,10 @@ class row {
             this.columns.push(column)
         }
     }
-    getHtmlElement(rowNumber) {
+    getHtmlElement() {
         let rowElement = document.createElement("div");
         rowElement.className = "row";
-        rowElement.setAttribute("data-row-id", rowNumber)
+        rowElement.setAttribute("data-row-id", this.id)
         this.columns.forEach(column => {
             let columnHtml = column.getHtmlElement()
             rowElement.appendChild(columnHtml)
