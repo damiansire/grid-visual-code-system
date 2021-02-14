@@ -1,0 +1,38 @@
+.bd-example {
+    position: relative;
+    padding: 1rem;
+    margin: 1rem -.75rem 0;
+    border: solid #dee2e6;
+    border-width: 1px 0 0;
+}
+
+.col,
+.row>[class^="col-"] {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    background-color: rgba(39, 41, 43, 0.03);
+    border: 1px solid rgba(39, 41, 43, 0.1);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.app-container {
+    height: 100%;
+    padding: 5%;
+}
+
+.row {
+    border: solid #dee2e6;
+}
+
+.button-container {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.selectedRow {
+    border: solid black 5px !important;
+}
