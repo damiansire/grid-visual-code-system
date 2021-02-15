@@ -14,35 +14,40 @@
         <div class="row app-show-div">
             <div class="col-sm-8">
                 <div class="bd-example bd-example-row">
+                    <h1>Actual grid system </h1>
                     <div id="grid-show-system" class="container">
                     </div>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="button-container">
-                    <button id="add-row" type="button" class="btn btn-primary">Agregar Fila</button>
+                    <button id="add-row" type="button" class="btn btn-primary">Add row</button>
                 </div>
                 <form id="colum-size-form">
                     <div class="button-container">
-                        <label for="columnSize">Tamaño de la Columna</label>
+                        <label for="columnSize">Size of column to add</label>
                         <input name="columnSize" type="number" value="1">
                     </div>
                     <div class="button-container">
-                        <label for="columnOffset">Offset de la Columna</label>
+                        <label for="columnOffset">Offset of column to add</label>
                         <input name="columnOffset" type="number" value="0">
                     </div>
                     <div class="button-container">
-                        <button id="add-column" type="submit" class="btn btn-primary">Agregar Columna</button>
+                        <button id="add-column" type="submit" class="btn btn-primary">Add Column</button>
                     </div>
                 </form>
             </div>
             <div class="col-sm-2">
                 <div class="row show-code-div">
-                    <div id="code-div" data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" tabindex="0">
+                    <div id="code-div">
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="list-group contextual-menu">
+        <button type="button" class="list-group-item list-group-item-action delete-row-button">Delete row</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
