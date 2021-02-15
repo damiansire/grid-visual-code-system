@@ -12,32 +12,53 @@
 <body>
     <div class="row app-container">
         <div class="row app-show-div">
-            <div class="col-sm-8">
+            <div class="col-md-8 col-sm-12">
                 <div class="bd-example bd-example-row">
                     <h1>Actual grid system </h1>
                     <div id="grid-show-system" class="container">
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-md-2 col-sm-12">
                 <div class="button-container">
                     <button id="add-row" type="button" class="btn btn-primary">Add row</button>
                 </div>
-                <form id="colum-size-form">
-                    <div class="button-container">
-                        <label for="columnSize">Size of column to add</label>
-                        <input name="columnSize" type="number" value="1">
-                    </div>
-                    <div class="button-container">
-                        <label for="columnOffset">Offset of column to add</label>
-                        <input name="columnOffset" type="number" value="0">
-                    </div>
-                    <div class="button-container">
-                        <button id="add-column" type="submit" class="btn btn-primary">Add Column</button>
-                    </div>
-                </form>
+                <div>
+                    <form id="colum-size-form">
+                        <div class="button-container">
+                            <label for="columnSize">Size of column to add</label>
+                            <input name="columnSize" type="number" value="1">
+                        </div>
+                        <div class="button-container">
+                            <label for="columnOffset">Offset of column to add</label>
+                            <input name="columnOffset" type="number" value="0">
+                        </div>
+                        <div class="button-container">
+                            <button id="add-column" type="submit" class="btn btn-primary">Add Column</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="help-button-wrapper">
+                    <ul class="help-list">
+                        <li>
+                            <h3>
+                                You can use right click to remove a row from the grid
+                            </h3>
+                        </li>
+                        <li>
+                            <h3>
+                                Click the add row button to add row.Then click on add column to add the column.
+                            </h3>
+                        </li>
+                    </ul>
+
+                    <button class="help-button">
+                      <span>?</span>
+                      Get Help
+                    </button>
+                </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-md-2 col-sm-12">
                 <div class="row show-code-div">
                     <div id="code-div">
                     </div>

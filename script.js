@@ -1,3 +1,4 @@
+var aux;
 class eventHandler {
     constructor(globalMainHandler) {
 
@@ -43,6 +44,11 @@ class eventHandler {
         document.getElementsByClassName("delete-row-button")[0].addEventListener("click", (event) => {
             this.globalMainHandler.deleteSelectedRow()
         })
+
+        document.getElementsByClassName("help-button")[0].addEventListener("click", () => {
+            document.getElementsByClassName("help-button-wrapper")[0].classList.toggle("expanded");
+        });
+
 
     }
 
@@ -124,19 +130,32 @@ class guiHandler {
     }
 
     redraw(rows, selectedRowId) {
-        this.gridDiv.innerHTML = "";
+        this.drawGridSystem(rows, selectedRowId)
+        this.drawHtmlClearCode(rows)
+    }
 
+    drawHtmlClearCode(rows) {
+        let fragmentElement = document.createDocumentFragment()
+        for (let rowNumber = 0; rowNumber < rows.length; rowNumber++) {
+            let rowHtml = rows[rowNumber].getHtmlElement(rowNumber);
+            fragmentElement.appendChild(rowHtml);
+        }
+        let fragmentHtml = [...fragmentElement.childNodes].map(n => n.outerHTML).join('\n')
+        document.getElementById("code-div").innerText = fragmentHtml;
+    }
+
+    drawGridSystem(rows, selectedRowId) {
+        this.gridDiv.innerHTML = "";
         for (let rowNumber = 0; rowNumber < rows.length; rowNumber++) {
             let rowHtml = rows[rowNumber].getHtmlElement(rowNumber);
             if (selectedRowId == rows[rowNumber].id) {
                 rowHtml.classList.add("selectedRow")
             }
+            rowHtml.setAttribute("data-row-id", rows[rowNumber].id)
             this.gridDiv.appendChild(rowHtml);
         }
-
-        let code = this.gridDiv.innerHTML;
-        document.getElementById("code-div").innerText = code;
     }
+
 
 };
 
@@ -161,7 +180,6 @@ class row {
     getHtmlElement() {
         let rowElement = document.createElement("div");
         rowElement.className = "row";
-        rowElement.setAttribute("data-row-id", this.id)
         this.columns.forEach(column => {
             let columnHtml = column.getHtmlElement()
             rowElement.appendChild(columnHtml)
